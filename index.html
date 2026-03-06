@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatFinder - AI Song Identifier</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-compact-disc spin-slow id-icon"></i>
+                <h1>Beat<span>Finder</span></h1>
+            </div>
+            <p class="subtitle">Identify songs instantly using beat, rhythm, and audio fingerprints.</p>
+        </header>
+
+        <main>
+            <div class="interactive-area">
+                <div class="canvas-container">
+                    <canvas id="waveformCanvas"></canvas>
+                    <div class="status-overlay" id="statusText">Ready to listen</div>
+                </div>
+
+                <div class="controls">
+                    <button id="identifyBtn" class="primary-btn">
+                        <div class="btn-content">
+                            <i class="fa-solid fa-microphone"></i>
+                            <span id="identifyBtnText">Identify Song</span>
+                        </div>
+                        <div class="btn-blobs">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </button>
+                    <div id="recordingTimer" class="timer hidden">00:00</div>
+                </div>
+            </div>
+
+            <!-- Loader -->
+            <div id="loader" class="loader-container hidden">
+                <div class="beat-map" id="beatMap">
+                    <!-- Dynamic beat bars will be added here -->
+                    <div class="beat-pulse"></div>
+                </div>
+                <p id="loaderText">Analyzing audio fingerprint...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="result-card error hidden">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3 id="errorMessage">Song not recognized. Please try again.</h3>
+                <button class="secondary-btn" onclick="resetApp()">Try Again</button>
+            </div>
+
+            <!-- Success Results -->
+            <div id="results" class="result-card hidden">
+                <div class="album-art-container">
+                    <img id="albumArt" src="" alt="Album Art" class="hidden">
+                    <div id="albumPlaceholder" class="album-placeholder">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                </div>
+                <div class="song-details">
+                    <h2 id="songTitle">Song Title</h2>
+                    <h3 id="artistName">Artist Name</h3>
+                    <div class="meta-info">
+                        <span class="meta-badge"><i class="fa-solid fa-record-vinyl"></i> <span id="albumName">Album
+                                Name</span></span>
+                        <span class="meta-badge"><i class="fa-regular fa-calendar"></i> <span
+                                id="releaseYear">Year</span></span>
+                        <span class="meta-badge bpm-badge"><i class="fa-solid fa-heart-pulse"></i> <span
+                                id="bpmValue">--</span>
+                            BPM</span>
+                        <span id="recognitionBadge" class="meta-badge tech-badge"><i class="fa-solid fa-microchip"></i>
+                            <span id="recognitionMethod">Analyzing...</span></span>
+                    </div>
+
+                    <div class="rhythm-profile">
+                        <div class="rhythm-label">Acoustic Rhythm Profile</div>
+                        <div class="rhythm-bars" id="rhythmProfile">
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                            <div class="r-bar"></div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a id="youtubeLink" href="#" target="_blank" class="youtube-btn hidden">
+                            <i class="fa-brands fa-youtube"></i> Watch on YouTube
+                        </a>
+                        <a id="spotifyLink" href="#" target="_blank" class="spotify-btn hidden">
+                            <i class="fa-brands fa-spotify"></i> Listen on Spotify
+                        </a>
+                    </div>
+                </div>
+                <button class="secondary-btn margin-top" onclick="resetApp()">Identify Another</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by AudD API and Web Audio API</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
