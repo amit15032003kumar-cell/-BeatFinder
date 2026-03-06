@@ -1,2 +1,2 @@
-# -BeatFinder
+# BeatFinder
 ai based  Beat Finder
